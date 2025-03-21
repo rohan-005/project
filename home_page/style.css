@@ -19,7 +19,7 @@ body {
 .search_box {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: #f9faff;
     border-radius: 20px;
     padding: 5px;
     overflow: hidden;
