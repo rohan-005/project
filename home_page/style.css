@@ -42,7 +42,7 @@ body {
     border: none;
     padding: 8px 15px;
     cursor: pointer;
-    border-radius: 0 20px 20px 0;
+    border-radius: 20px;
 }
 
 .search_box button:hover {
@@ -65,11 +65,27 @@ body {
     border-radius: 5px;
 }
 
-.live_updates {
-    text-align: center;
-    margin-top: 20px;
+.second_part{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 50vh;
+    margin-top: 5vh;
+}
+
+.live_updates_container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    height: 40vh;
+    padding: 10px;
+}
+
+.live_updates {
+    width: 50%;
+    height: 100%;
     overflow: hidden;
+    text-align: center;
 }
 
 .carousel {
@@ -92,6 +108,38 @@ body {
     border-radius: 10px;
 }
 
+.notification_box {
+    width: 30%;
+    height: 30vh;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.notification_box h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.notification_box ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.notification_box ul li {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -108,6 +156,13 @@ body {
     }
     .operations a {
         padding: 8px;
+    }
+    .live_updates_container {
+        flex-direction: column;
+    }
+    .live_updates, .notification_box {
+        width: 100%;
+        margin-bottom: 10px;
     }
     .carousel {
         max-width: 100%;
