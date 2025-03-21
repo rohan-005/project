@@ -7,12 +7,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #050322;
     padding: 10px 20px;
 }
 
 .logo img {
-    height: 40px;
+    height: 60px;
+    width: 130px;
 }
 
 .search_box {
@@ -20,27 +21,36 @@ body {
     align-items: center;
     background: #fff;
     border-radius: 20px;
-    padding: 5px 10px;
+    padding: 5px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
 }
 
 .search_box input {
+    flex: 1;
     border: none;
     outline: none;
     padding: 5px;
     font-size: 16px;
+    border-radius: 20px 0 0 20px;
 }
 
 .search_box button {
     background: #555;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 15px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 0 20px 20px 0;
 }
 
 .search_box button:hover {
     background: #777;
+}
+
+.operations {
+    font-size: 20px;
 }
 
 .operations a {
@@ -55,7 +65,33 @@ body {
     border-radius: 5px;
 }
 
-/* Responsive Navbar */
+.live_updates {
+    text-align: center;
+    margin-top: 20px;
+    height: 50vh;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-item {
+    min-width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -72,5 +108,8 @@ body {
     }
     .operations a {
         padding: 8px;
+    }
+    .carousel {
+        max-width: 100%;
     }
 }
