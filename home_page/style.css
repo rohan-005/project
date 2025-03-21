@@ -142,29 +142,74 @@ body {
 
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
+        gap: 10px;
     }
+
+    .logo {
+        flex: 0 0 auto;
+    }
+
     .search_box {
-        width: 100%;
-        margin: 10px 0;
+        flex: 1;
+        max-width: 60%;
+        margin-left: 20px;
     }
+
+    .search_box input {
+        font-size: 14px;
+    }
+
+    .search_box button {
+        padding: 6px 12px;
+    }
+
     .operations {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         text-align: center;
+        width: 100%;
     }
+
     .operations a {
         padding: 8px;
+        font-size: 15px;
     }
-    .live_updates_container {
+
+    .second_part {
+        display: flex;
         flex-direction: column;
+        align-items: center;
+        width: 80%; 
+        max-width: 600px;
+        margin: 0 auto; 
+        height: 70vh;
     }
-    .live_updates, .notification_box {
+    
+    .live_updates {
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        height: 300vh;
     }
+    
+    .notification_box {
+        width: 100%; 
+        height: auto;
+        min-height: 150px;
+        max-height: 400px;
+        overflow-y: auto; 
+        background: #f8f9fa; 
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    
     .carousel {
         max-width: 100%;
     }
 }
+
