@@ -65,7 +65,7 @@ body {
     border-radius: 5px;
 }
 
-.second_part{
+.second_part {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,29 +84,44 @@ body {
 .live_updates {
     width: 50%;
     height: 100%;
-    overflow: hidden;
+    overflow: hidden; /* Ensure overflow is hidden */
     text-align: center;
+    position: relative;
+}
+
+/* Ensure this container hides overflow */
+.carousel-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel {
     display: flex;
-    overflow: hidden;
-    width: 100%;
+    width: 400%; /* Dynamically updated in JS */
     height: 100%;
-    position: relative;
+    transition: transform 0.5s ease-in-out;
 }
 
 .carousel-item {
-    min-width: 100%;
-    transition: transform 0.5s ease-in-out;
+    flex: 0 0 100%; /* Ensures each item takes full width */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* Ensures image fits well */
     border-radius: 10px;
 }
+
 
 .notification_box {
     width: 30%;
@@ -164,7 +179,7 @@ body {
 .card {
     position: relative;
     width: 30vh;
-    height: 40vh;
+    height: 42vh;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;

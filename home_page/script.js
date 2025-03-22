@@ -2,53 +2,62 @@ document.addEventListener("DOMContentLoaded", function () {
     // Carousel Functionality
     let index = 0;
     const carousel = document.querySelector(".carousel");
-    const belt_items = document.querySelectorAll(".carousel-item");
-    const prevBtn = document.querySelector(".carousel-controls button:first-child");
-    const nextBtn = document.querySelector(".carousel-controls button:last-child");
+    let beltItems = document.querySelectorAll(".carousel-item");
+
+    function updateItems() {
+        beltItems = document.querySelectorAll(".carousel-item");
+        if (carousel) {
+            carousel.style.width = `${beltItems.length * 100}%`; // Adjust carousel width dynamically
+            beltItems.forEach(item => item.style.flex = "0 0 100%");
+        }
+    }
 
     function showSlide() {
+        updateItems(); // Ensure new items are included
         if (carousel) {
+            carousel.style.transition = "transform 0.5s ease-in-out";
             carousel.style.transform = `translateX(-${index * 100}%)`;
         }
     }
 
     function nextSlide() {
-        index = (index + 1) % belt_items.length;
+        index = (index + 1) % beltItems.length; // Loop through images
         showSlide();
     }
 
-    function prevSlide() {
-        index = (index - 1 + belt_items.length) % belt_items.length;
-        showSlide();
-    }
-
-    let autoSlide = setInterval(nextSlide, 2000);
+    let autoSlide = setInterval(nextSlide, 3000); // Auto-slide every 3 seconds
 
     function resetAutoSlide() {
         clearInterval(autoSlide);
-        autoSlide = setInterval(nextSlide, 2000);
+        autoSlide = setInterval(nextSlide, 3000);
     }
 
-    if (nextBtn && prevBtn) {
-        nextBtn.addEventListener("click", () => {
-            nextSlide();
-            resetAutoSlide();
-        });
+    // Initialize the first slide
+    showSlide();
 
-        prevBtn.addEventListener("click", () => {
-            prevSlide();
-            resetAutoSlide();
-        });
+    // Live auction notifications update
+    const notifications = document.getElementById("notifications");
+    const liveUpdates = [
+        "Bid placed on Item C",
+        "New auction started for Item D",
+        "Item E sold to highest bidder"
+    ];
 
-        if (belt_items.length <= 1) {
-            prevBtn.style.display = "none";
-            nextBtn.style.display = "none";
+    setInterval(() => {
+        if (notifications) {
+            const newNotification = document.createElement("li");
+            newNotification.textContent = liveUpdates[Math.floor(Math.random() * liveUpdates.length)];
+            notifications.appendChild(newNotification);
+
+            if (notifications.children.length > 5) {
+                notifications.removeChild(notifications.firstChild);
+            }
         }
-    }
+    }, 5000);
 
     // Leaderboard Functionality
     const itemsList = ["Vintage Clock", "Antique Vase", "Rare Coin", "Signed Jersey", "Painting", "Jewelry Set", "Collector's Watch"];
-    
+
     function generateRandomBid() {
         const item = itemsList[Math.floor(Math.random() * itemsList.length)];
         const user = "User" + Math.floor(Math.random() * 1000);
