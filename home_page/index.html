@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go For It</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="footerstyle.css">
 </head>
 <body>
     <div class="navbar">
         <div class="logo">
-            <img src="icon_bid.png" alt="Logo">
+            <img src="iconsandposters/icon_bid.png" alt="Logo">
         </div>
         <div class="search_box">
             <input type="text" placeholder="Search...">
@@ -26,9 +28,9 @@
     <div class="second_part">
         <div class="live_updates" id="live-auction">
             <div class="carousel">
-                <div class="carousel-item"><img src="poster.jpg" alt="Auction Item 1"></div>
-                <div class="carousel-item"><img src="poster.jpg" alt="Auction Item 2"></div>
-                <div class="carousel-item"><img src="poster.jpg" alt="Auction Item 3"></div>
+                <div class="carousel-item"><img src="iconsandposters/poster.jpg" alt="Auction Item 1"></div>
+                <div class="carousel-item"><img src="iconsandposters/poster.jpg" alt="Auction Item 2"></div>
+                <div class="carousel-item"><img src="iconsandposters/poster.jpg" alt="Auction Item 3"></div>
             </div>
             <div class="carousel-controls">
                 <button onclick="prevSlide()">&#10094;</button>
@@ -52,39 +54,106 @@
     <div class="items">
         <div class="container">
             <div class="card">
-                <img src="canyon.jpg" alt="Canyons">
+                <img src="iconsandposters/poster.jpg" alt="Canyons">
                 <div class="content">
                     <h3>Canyons</h3>
                     <p>Lorem ipsum dolor sit amet.</p>
                 </div>
             </div>
             <div class="card">
-                <img src="beach.jpg" alt="Beach1es">
+                <img src="iconsandposters/poster.jpg" alt="Beach1es">
                 <div class="content">
                     <h3>Beaches</h3>
                 </div>
             </div>
             <div class="card">
-                <img src="beach.jpg" alt="Beaches">
+                <img src="iconsandposters/poster.jpg" alt="Beaches">
                 <div class="content">
                     <h3>Beaches</h3>
                 </div>
             </div>
             <div class="card">
-                <img src="trees.jpg" alt="Trees">
+                <img src="iconsandposters/poster.jpg" alt="Trees">
                 <div class="content">
                     <h3>Trees</h3>
                 </div>
             </div>
             <div class="card">
-                <img src="lake.jpg" alt="Lakes">
+                <img src="iconsandposters/poster.jpg" alt="Lakes">
                 <div class="content">
                     <h3>Lakes</h3>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="line"></div>
     
+    <div class="leaderboard">
+        <div class="tabs">
+            <button id="live-bids-tab" class="active" onclick="showBids('live')">Live Bids</button>
+            <button id="completed-bids-tab" onclick="showBids('completed')">Completed Bids</button>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>User</th>
+                    <th>Time</th>
+                    <th>Bid Amount</th>
+                    <th>Multiplier</th>
+                    <th>Final Price</th>
+                </tr>
+            </thead>
+            <tbody id="live-bids">
+            </tbody>
+            <tbody id="completed-bids" class="hidden">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="line"></div>
+
+
+    <footer>
+        <div class="content">
+          <div class="top">
+            <div class="media-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="link-boxes">
+            <ul class="box">
+              <li class="link_name">Company</li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Get started</a></li>
+            </ul>
+            
+            <ul class="box input-box">
+              <li class="link_name">Register</li>
+              <li><input type="text" placeholder="Enter your email"></li>
+              <li><input type="button" value="Subscribe"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom-details">
+          <div class="bottom_text">
+            <span class="copyright_text">Copyright ©  <a href="#">greeenxd</a>All rights reserved</span>
+            <span class="policy_terms">
+              <a href="#">Privacy policy</a>
+              <a href="#">Terms & condition</a>
+            </span>
+          </div>
+        </div>
+      </footer>
+
 
     <script src="script.js"></script>
 </body>

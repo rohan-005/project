@@ -145,16 +145,18 @@ body {
     height: 3px;
     background-color: rgb(200, 192, 192);
     margin: auto;
-    
+    margin-top: 10vh;
 }
 
 .items {
-    margin-top: 10vh;
+    margin-top: 7vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
+
+
 .container {
     display: flex;
     gap: 10vh;
@@ -187,6 +189,72 @@ body {
 }
 
 
+/* leaderboard */
+
+.leaderboard {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    width: 80%;
+    margin: 50px auto;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* min-height: 500px; */
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.tabs button {
+    background: #e0e0e0;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tabs button.active {
+    background: #007bff;
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+thead {
+    background: #007bff;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.positive {
+    color: #28a745;
+}
+
+.negative {
+    color: #dc3545;
+}
+
+.hidden {
+    display: none;
+}
+
+
 
 @media (max-width: 768px) {
     .navbar {
@@ -214,6 +282,7 @@ body {
     .search_box button {
         padding: 6px 12px;
     }
+
 
     .operations {
         display: flex;

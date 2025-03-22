@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+} */
+
+footer {
+  background: #10182f;
+  width: 100%;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100px;
+  height: 1px;
+  width: 100%;
+  background: #afafb6;
+}
+
+footer .content {
+  max-width: 1250px;
+  margin: auto;
+  padding: 30px 40px;
+}
+
+footer .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.top .logo-details {
+  color: #fff;
+  font-size: 30px;
+}
+
+.top .media-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.top .media-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 17px;
+  text-decoration: none;
+  transition: 0.4s ease;
+}
+
+.top .media-icons a:nth-child(1) { background: #4267b2; }
+.top .media-icons a:nth-child(2) { background: #1da1f2; }
+.top .media-icons a:nth-child(3) { background: #e1306c; }
+.top .media-icons a:nth-child(4) { background: #0077b5; }
+.top .media-icons a:nth-child(5) { background: #ff0000; }
+
+.top .media-icons a:hover {
+  background: #fff;
+  color: inherit;
+}
+
+footer .link-boxes {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.link-boxes .box {
+  width: calc(100% / 5 - 10px);
+}
+
+.box .link_name {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.box .link_name::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 35px;
+  background: #fff;
+}
+
+.box li {
+  list-style: none;
+  margin: 6px 0;
+}
+
+.box li a {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: 0.4s ease;
+}
+
+.box li a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.input-box input {
+  width: 100%;
+  height: 40px;
+  border: 2px solid #afafb6;
+  background: #eaeaea;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 15px;
+  color: #000;
+}
+
+.input-box input::placeholder {
+  color: #afafb6;
+}
+
+.input-box input[type="button"] {
+  background: #fff;
+  color: #3824d2;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.4s ease;
+  margin-top: 4px;
+}
+
+.input-box input[type="button"]:hover {
+  opacity: 0.8;
+}
+
+footer .bottom-details {
+  background: #2e2748;
+  padding: 20px 40px;
+  text-align: center;
+}
+
+.bottom-details .bottom_text {
+  color: #fff;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.bottom-details a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.bottom-details a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 786px) {
+  .top .logo-details {
+    font-size: 26px;
+  }
+
+  .top .media-icons a {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+
+  .link-boxes .box {
+    width: calc(100% / 3 - 10px);
+  }
+
+  .input-box {
+    width: 60%;
+  }
+
+  .bottom-details {
+    font-size: 12px;
+  }
+}
