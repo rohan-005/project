@@ -3,45 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Login Form</title>
     <link rel="stylesheet" href="loginpage.css">
-
-    <title>Login Page</title>
 </head>
 <body>
+
     <div class="leftbar">
-        <img src="https://images.unsplash.com/photo-1518133120397-258d5eb470c6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGJldHRpbmd8ZW58MHx8MHx8fDA%3D" alt="description">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
     </div>
+
     <div class="rightbar">
-        <h1>
-            Create an account
-        </h1>
-        <p>Already have an account? <a href="#">Log in</a></p>
-        <div class="form">
-            <input type="text" placeholder="First Name">
-            <input type="text" placeholder="Last Name"><br>
-            <input type="email" placeholder="Email"><br>
-            <div class="password-container">
-                <input type="password" id="password" placeholder="Enter your password"><br>
+        <div class="login-box">
+            <h1>Create an account</h1>
+            <p>Already have an account? <a href="#">Log in</a></p>
+
+            <form class="form">
+                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="Last Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Enter your password">
+
                 <div class="tickcheckbox">
-                <label><input type="checkbox">
-                I agree to <a href="#">Terms & Conditions</a> </label>
-            </div>
-            <div class="createaccount">
-                <button>Create account</button>
-            </div>
-            
-                                   
-                
-            </div>
-            
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I agree to Terms & Conditions</label>
+                </div>
 
+                <div class="createaccount">
+                    <button type="submit">Create account</button>
+                </div>
+            </form>
         </div>
-        
-
     </div>
-    
-    
-    
+
 </body>
 </html>
