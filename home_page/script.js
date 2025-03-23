@@ -123,27 +123,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
 const themeStyle = document.getElementById("theme-style");
 
-// Check local storage for saved theme and set initial theme and icon
+// Check local storage for saved theme
 if (localStorage.getItem("theme") === "dark") {
     themeStyle.href = "dark_mode.css";
-    themeToggle.innerHTML = "☀️"; // Light mode icon
-} else {
-    themeToggle.innerHTML = "🌙"; // Dark mode icon
+    themeIcon.classList.replace("fa-moon", "fa-sun"); // Change to sun icon
 }
 
 themeToggle.addEventListener("click", function () {
     if (themeStyle.href.includes("style.css")) {
         themeStyle.href = "dark_mode.css";
         localStorage.setItem("theme", "dark");
-        themeToggle.innerHTML = "☀️"; // Light mode icon
+        themeIcon.classList.replace("fa-moon", "fa-sun"); // Change to sun icon
     } else {
         themeStyle.href = "style.css";
         localStorage.setItem("theme", "light");
-        themeToggle.innerHTML = "🌙"; // Dark mode icon
+        themeIcon.classList.replace("fa-sun", "fa-moon"); // Change to moon icon
     }
 });
+
 
 
 });

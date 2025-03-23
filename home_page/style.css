@@ -73,14 +73,20 @@ body {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 20px;
     color: #E3FEF7;
     transition: 0.3s;
+    margin-right: 10px;
+}
+
+#theme-toggle i {
+    font-size: 24px;
 }
 
 #theme-toggle:hover {
-    color: #77B0AA;
+    color: #1d2221;
 }
+
   .second_part {
     display: flex;
     justify-content: center;

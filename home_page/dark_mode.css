@@ -78,6 +78,10 @@ body {
   transition: 0.3s;
 }
 
+#theme-toggle i {
+    font-size: 24px;
+}
+
 #theme-toggle:hover {
   color: #77B0AA;
 }
