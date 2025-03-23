@@ -1,0 +1,177 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1f1f1f, #000000);
+    overflow: hidden;
+}
+
+/* Left Side Animation */
+.leftbar {
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.leftbar img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    animation: floatImage 6s infinite ease-in-out alternate;
+}
+
+@keyframes floatImage {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* Right Side Form */
+.rightbar {
+    width: 50%;
+    height: 100vh;
+    background: linear-gradient(135deg, #212121, #1a1a1a);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: slideIn 1s ease-out;
+    position: relative;
+}
+
+/* Glowing Effect */
+.rightbar::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 70%;
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 123, 255, 0.3);
+    filter: blur(80px);
+    z-index: 1;
+}
+
+/* Card Effect */
+.login-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    width: 80%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+    z-index: 2;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes slideIn {
+    0% { transform: translateX(100px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #aaa;
+    text-align: center;
+}
+
+p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styling */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form input:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* Password Container */
+.password-container {
+    position: relative;
+}
+
+.tickcheckbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #bbb;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.tickcheckbox input {
+    transform: scale(1.2);
+}
+
+/* Button Animation */
+.createaccount button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: linear-gradient(90deg, #007bff, #6610f2);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.createaccount button:hover {
+    background: linear-gradient(90deg, #6610f2, #007bff);
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.3);
+}
