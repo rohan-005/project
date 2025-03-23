@@ -69,6 +69,19 @@ body {
   border-radius: 5px;
 }
 
+#theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #E3FEF7;
+  transition: 0.3s;
+}
+
+#theme-toggle:hover {
+  color: #77B0AA;
+}
+
 .second_part {
   display: flex;
   justify-content: center;
@@ -183,7 +196,7 @@ body {
   position: relative;
   width: 30vh;
   height: 42vh;
-  border-radius: 10px;
+  border-radius: 30px 30px 10px 10px ;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: #697565;

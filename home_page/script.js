@@ -120,4 +120,30 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ensure tab switching works
     document.getElementById("live-bids-tab")?.addEventListener("click", () => showBids("live"));
     document.getElementById("completed-bids-tab")?.addEventListener("click", () => showBids("completed"));
+
+
+    const themeToggle = document.getElementById("theme-toggle");
+const themeStyle = document.getElementById("theme-style");
+
+// Check local storage for saved theme and set initial theme and icon
+if (localStorage.getItem("theme") === "dark") {
+    themeStyle.href = "dark_mode.css";
+    themeToggle.innerHTML = "☀️"; // Light mode icon
+} else {
+    themeToggle.innerHTML = "🌙"; // Dark mode icon
+}
+
+themeToggle.addEventListener("click", function () {
+    if (themeStyle.href.includes("style.css")) {
+        themeStyle.href = "dark_mode.css";
+        localStorage.setItem("theme", "dark");
+        themeToggle.innerHTML = "☀️"; // Light mode icon
+    } else {
+        themeStyle.href = "style.css";
+        localStorage.setItem("theme", "light");
+        themeToggle.innerHTML = "🌙"; // Dark mode icon
+    }
+});
+
+
 });
