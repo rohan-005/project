@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #E3FEF7;
+    background: linear-gradient(190deg, #010b4a, #0D1736, #010236, #000000);
     color: #003C43;
 }
 
@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #135D66;
+    background: transparent;
     padding: 10px 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -29,13 +29,14 @@ body {
 .search_box {
     display: flex;
     align-items: center;
-    background: #77B0AA;
+    background: #8b60ee;
     border-radius: 20px;
     padding: 5px;
     overflow: hidden;
     width: 100%;
     max-width: 400px;
     transition: box-shadow 0.3s ease;
+    border-color: #0077b5;
 }
 
 .search_box:hover {
@@ -50,14 +51,19 @@ body {
     font-size: 16px;
     border-radius: 20px 0 0 20px;
     background: transparent;
-    color: #003C43;
+    color: #000000;
 }
 
 .search_box button {
-    background: #135D66;
+    background: #210F37;
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 8px 15px;.logo img {
+        height: 60px;
+        width: 130px;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+    }
     cursor: pointer;
     border-radius: 20px;
     transition: background 0.3s ease;
@@ -81,24 +87,6 @@ body {
 .operations a:hover {
     background: #77B0AA;
     border-radius: 5px;
-}
-
-#theme-toggle {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    color: #E3FEF7;
-    transition: 0.3s;
-    margin-right: 10px;
-}
-
-#theme-toggle i {
-    font-size: 24px;
-}
-
-#theme-toggle:hover {
-    color: #1d2221;
 }
 
 .second_part {
@@ -160,7 +148,7 @@ body {
 .notification_box {
     width: 30%;
     height: 30vh;
-    background: #E3FEF7;
+    background: #6f2cc7;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -187,7 +175,7 @@ body {
 }
 
 .notification_box ul li {
-    background: #E3FEF7;
+    background: #f1f3f2;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -399,7 +387,8 @@ th, td {
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 footer {
-    background: #003C43;
+    /* opacity: - 1; */
+    background: transparent;
     width: 100%;
 }
 
@@ -539,7 +528,7 @@ footer .link-boxes {
 }
 
 footer .bottom-details {
-    background: #135D66;
+    background: transparent;
     padding: 20px 40px;
     text-align: center;
 }

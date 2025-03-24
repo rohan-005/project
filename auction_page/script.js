@@ -77,31 +77,3 @@ function simulateRandomBids() {
 simulateRandomBids();
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
-  
-  const themeToggle = document.getElementById("theme-toggle");
-const themeIcon = document.getElementById("theme-icon");
-const themeStyle = document.getElementById("theme-style");
-
-// Check local storage for saved theme
-if (localStorage.getItem("theme") === "dark") {
-  themeStyle.href = "../dark_mode.css";
-  themeIcon.classList.replace("fa-moon", "fa-sun"); // Change to sun icon
-}
-
-themeToggle.addEventListener("click", function () {
-  if (themeStyle.href.includes("../style.css")) {
-      themeStyle.href = "../dark_mode.css";
-      localStorage.setItem("theme", "dark");
-      themeIcon.classList.replace("fa-moon", "fa-sun"); // Change to sun icon
-  } else {
-      themeStyle.href = "../style.css";
-      localStorage.setItem("theme", "light");
-      themeIcon.classList.replace("fa-sun", "fa-moon"); // Change to moon icon
-  }
-});
-
-
-
-});
