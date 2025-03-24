@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auction Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
+
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="icon_bid-removebg-preview.png" alt="Logo">
+        </div>
+        <div class="search_box">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+        <div class="operations">
+            <button id="theme-toggle">
+                <i id="theme-icon" class="fas fa-moon"></i>
+            </button>
+            <a href="../index.html">Home</a>
+            <a href="#auction-status">Auction Status</a>
+            <a href="#live-auction">Live Auction</a>
+            <a href="#signup">SignUp/Register</a>
+        </div>
+    </div>
+
+  <main>
+    <!-- Side Panel for Random Bids -->
+    <aside id="side-panel">
+      <h2>Live Bids</h2>
+      <ul id="live-bids"></ul>
+    </aside>
+
+    <!-- Item List -->
+    <section id="item-list">
+      <h2>Items for Bidding</h2>
+      <div class="items">
+        <div class="item" data-id="1" onclick="selectItem(1)">
+          <img src="item1.jpg" alt="Item 1">
+          <p>Item 1</p>
+        </div>
+        <div class="item" data-id="2" onclick="selectItem(2)">
+          <img src="item2.jpg" alt="Item 2">
+          <p>Item 2</p>
+        </div>
+        <!-- Add more items here -->
+      </div>
+    </section>
+
+    <!-- Item Details and Bid Form -->
+    <section id="item-details" style="display: none;">
+      <h2>Item Details</h2>
+      <div id="selected-item">
+        <img id="item-image" src="" alt="Selected Item">
+        <p id="item-description"></p>
+        <p>Current Bid: $<span id="current-bid">0</span></p>
+      </div>
+      <form id="bid-form">
+        <label for="bid-amount">Your Bid:</label>
+        <input type="number" id="bid-amount" min="0" step="1" required>
+        <button type="submit">Place Bid</button>
+      </form>
+      <h3>Bid History</h3>
+      <ul id="bid-history"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="content">
+      <div class="top">
+        <div class="media-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="link-boxes">
+        <ul class="box">
+          <li class="link_name">Company</li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Get started</a></li>
+        </ul>
+        
+        <ul class="box input-box">
+          <li class="link_name">Register</li>
+          <li><input type="text" placeholder="Enter your email"></li>
+          <li><input type="button" value="Subscribe"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-details">
+      <div class="bottom_text">
+        <span class="copyright_text">Copyright ©  <a href="#">greeenxd</a></span>
+        <p><span class="copyright_text">All rights reserved</span></p>
+        <span class="policy_terms">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms & condition</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
