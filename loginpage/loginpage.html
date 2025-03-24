@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="loginpage.css">
 </head>
 <body>
@@ -16,22 +16,20 @@
 
     <div class="rightbar">
         <div class="login-box">
-            <h1>Create an account</h1>
-            <p>Already have an account? <a href="#">Log in</a></p>
+            <h1>Login</h1>
+            <p>Don't have an account? <a href="../signup_page/signup.html">Sign up</a></p>
 
             <form class="form">
-                <input type="text" placeholder="First Name">
-                <input type="text" placeholder="Last Name">
                 <input type="email" placeholder="Email">
-                <input type="password" placeholder="Enter your password">
+                <input type="password" placeholder="Password">
 
                 <div class="tickcheckbox">
-                    <input type="checkbox" id="terms">
-                    <label for="terms">I agree to Terms & Conditions</label>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember Me</label>
                 </div>
 
-                <div class="createaccount">
-                    <button type="submit">Create account</button>
+                <div class="login-btn">
+                    <button type="submit">Login</button>
                 </div>
             </form>
         </div>

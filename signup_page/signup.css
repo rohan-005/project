@@ -1,3 +1,6 @@
+/* loginpage.css */
+
+/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 * {
@@ -12,11 +15,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #121212;
+    background: #121212; /* Mate black background */
     overflow: hidden;
 }
 
-/* Left Section with Floating Waves */
+/* Left Side with Waves */
 .leftbar {
     width: 50%;
     height: 100vh;
@@ -29,29 +32,29 @@ body {
     width: 120%;
     height: 300px;
     border-radius: 50%;
-    filter: blur(90px);
-    animation: moveWaves 6s infinite linear alternate;
+    filter: blur(100px);
+    animation: moveWaves 6s infinite linear;
 }
 
 .wave1 {
     top: 15%;
     left: -40%;
     animation-duration: 8s;
-    background: linear-gradient(90deg, rgba(255, 0, 150, 0.5), rgba(255, 102, 200, 0.5));
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.5), rgba(255, 102, 102, 0.5)); /* Red wave */
 }
 
 .wave2 {
     top: 50%;
     left: -30%;
     animation-duration: 10s;
-    background: linear-gradient(90deg, rgba(0, 123, 255, 0.5), rgba(0, 191, 255, 0.5));
+    background: linear-gradient(90deg, rgba(0, 123, 255, 0.5), rgba(0, 191, 255, 0.5)); /* Blue wave */
 }
 
 .wave3 {
     bottom: 10%;
     left: -20%;
     animation-duration: 12s;
-    background: linear-gradient(90deg, rgba(255, 255, 0, 0.5), rgba(255, 200, 102, 0.5));
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.5), rgba(255, 102, 102, 0.5)); /* Red wave */
 }
 
 @keyframes moveWaves {
@@ -60,23 +63,23 @@ body {
     100% { transform: translateX(-50px) scale(1); }
 }
 
-/* Right Section with Glassmorphism */
+/* Right Side Form */
 .rightbar {
     width: 50%;
     height: 100vh;
-    background: rgba(25, 25, 25, 0.8);
+    background: rgba(25, 25, 25, 0.8); /* Semi-transparent background */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.18);
     animation: slideIn 1s ease-out;
+    position: relative;
+    backdrop-filter: blur(15px); /* Glassmorphism effect */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Thin border */
 }
 
-/* Glowing Effect */
+/* Glowing Effect Enhancement */
 .rightbar::before {
     content: "";
     position: absolute;
@@ -95,20 +98,21 @@ body {
     100% { opacity: 1; transform: scale(1.1); }
 }
 
-/* Login Box */
+/* Login Box Refinement */
 .login-box {
-    background: rgba(33, 33, 33, 0.7);
+    background: rgba(33, 33, 33, 0.7); /* Transparent background */
     border-radius: 20px;
     padding: 40px;
     width: 85%;
     max-width: 450px;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px); /* Glassmorphism */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.2);
     animation: fadeIn 1.5s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for glass effect */
 }
 
+/* Animations */
 @keyframes slideIn {
     0% { transform: translateX(150px); opacity: 0; }
     100% { transform: translateX(0); opacity: 1; }
@@ -122,7 +126,7 @@ body {
 h1 {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #e0e0e0;
+    color: #e0e0e0; /* Light text */
     text-align: center;
     margin-bottom: 10px;
 }
@@ -130,12 +134,12 @@ h1 {
 p {
     font-size: 1.1rem;
     margin-bottom: 25px;
-    color: #bdbdbd;
+    color: #bdbdbd; /* Medium grey text */
     text-align: center;
 }
 
 p a {
-    color: #81d4fa;
+    color: #81d4fa; /* Light blue link */
     text-decoration: none;
     font-weight: 600;
 }
@@ -144,7 +148,7 @@ p a:hover {
     text-decoration: underline;
 }
 
-/* Form Fields */
+/* Form Styling with Improved Focus Effects */
 .form {
     display: flex;
     flex-direction: column;
@@ -156,11 +160,12 @@ p a:hover {
 .form input {
     width: 100%;
     padding: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
     border-radius: 8px;
     font-size: 1.1rem;
-    background: rgba(51, 51, 51, 0.7);
-    color: #e0e0e0;
+    background: rgba(51, 51, 51, 0.7); /* Transparent input background */
+    color: #e0e0e0; /* Light text */
     transition: all 0.3s ease-in-out;
 }
 
@@ -174,7 +179,7 @@ p a:hover {
     transform: translateY(-3px);
 }
 
-/* Checkbox */
+/* Checkbox Styling with Enhanced Visuals */
 .tickcheckbox {
     display: flex;
     align-items: center;
@@ -182,6 +187,8 @@ p a:hover {
     font-size: 1rem;
     color: #ccc;
     margin-top: 15px;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
     cursor: pointer;
 }
 
@@ -193,24 +200,22 @@ p a:hover {
 }
 
 .tickcheckbox label {
-    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #e0e0e0; /* Light text */
 }
 
-/* Button */
-.login-btn button {
+/* Button with Gradient and Subtle Hover Effect */
+.createaccount button {
     width: 100%;
     padding: 14px;
     border: none;
     border-radius: 10px;
     font-size: 1.1rem;
-    background: #81d4fa;
-    color: #121212;
+    background: #81d4fa; /* Light blue button */
+    color: #121212; /* Dark text */
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    margin-top: 10px;
-}
-
-.login-btn button:hover {
-    background: #00c3ff;
-    box-shadow: 0 4px 20px rgba(0, 195, 255, 0.5);
+    margin-top: 10
 }
