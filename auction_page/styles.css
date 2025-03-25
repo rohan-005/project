@@ -369,15 +369,6 @@ body {
   }
 }
 
-@media (min-width: 1024px) {
-  .auction-container {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  
-  .item-details-section {
-    grid-column: span 1;
-  }
-}
 
 /* Animation for timer */
 @keyframes blink {
