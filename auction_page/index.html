@@ -7,66 +7,83 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="../style.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">
-            <img src="icon_bid-removebg-preview.png" alt="Logo">
-        </div>
-        <div class="search_box">
-            <input type="text" placeholder="Search...">
-            <button>Search</button>
-        </div>
-        <div class="operations">
-            
-            <a href="../index.html">Home</a>
-            <a href="#auction-status">Auction Status</a>
-            <a href="#live-auction">Live Auction</a>
-            <a href="#signup">SignUp/Register</a>
-        </div>
+  <div class="navbar">
+    <div class="logo">
+        <img src="../home_page/iconsandposters/final_call_logo.png" alt="Logo">
     </div>
+    <div class="search_box">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+    <div class="operations">
+      <a href="../index.html">Home</a>
+      <a href="auction_page/index.html">Bidding Arena</a>
+      <a href="#live-auction">Live Auction</a>
+      <a href="#live-auction">
+        <img src="../home_page/iconsandposters/profile_icon_boy.png" alt="Profile" class="profile_icon">
+      </a>
+  </div>
+  
+</div>
+  
 
-  <main>
-    <!-- Side Panel for Random Bids -->
-    <aside id="side-panel">
-      <h2>Live Bids</h2>
-      <ul id="live-bids"></ul>
-    </aside>
+<div class="auction-container">
+  <!-- Items List -->
+  <div class="items-section">
+    <h2 class="section-title">Available Items</h2>
+    <div class="items-grid" id="itemsGrid">
+      <!-- Items will be populated by JavaScript -->
+    </div>
+  </div>
 
-    <!-- Item List -->
-    <section id="item-list">
-      <h2>Items for Bidding</h2>
-      <div class="items">
-        <div class="item" data-id="1" onclick="selectItem(1)">
-          <img src="item1.jpg" alt="Item 1">
-          <p>Item 1</p>
+  <!-- Live Bids Section -->
+  <div class="live-bids-section">
+    <h2 class="section-title">Live Bids <span class="live-pulse"></span></h2>
+    <div class="bids-feed" id="bidsFeed">
+      <!-- Bids will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Item Details Section -->
+  <div class="item-details-section" id="itemDetails">
+    <div class="timer-display" id="timerDisplay"></div>
+    <h2 class="section-title">Item Details</h2>
+    <div class="selected-item-card" id="selectedItemCard">
+      <div class="item-badge">SELECTED</div>
+      <h3 id="selectedItemTitle">No item selected</h3>
+      <p class="item-description" id="selectedItemDescription">Please select an item to view details</p>
+      
+      <div class="bid-info">
+        <div class="current-bid">
+          <span>Current Bid:</span>
+          <span class="bid-value" id="currentBidValue">$0</span>
         </div>
-        <div class="item" data-id="2" onclick="selectItem(2)">
-          <img src="item2.jpg" alt="Item 2">
-          <p>Item 2</p>
+        <div class="bid-form">
+          <label for="your-bid">Your Bid ($)</label>
+          <div class="bid-input-group">
+            <input type="number" id="your-bid" placeholder="Enter amount" min="1">
+            <button class="bid-button" id="placeBidButton">Place Bid</button>
+          </div>
+          <p class="error-message" id="bidErrorMessage"></p>
         </div>
-        <!-- Add more items here -->
       </div>
-    </section>
+      
+      <div class="bid-history">
+        <h4>Bid History</h4>
+        <div class="history-timeline" id="bidHistoryTimeline">
+          <!-- Bid history will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Item Details and Bid Form -->
-    <section id="item-details" style="display: none;">
-      <h2>Item Details</h2>
-      <div id="selected-item">
-        <img id="item-image" src="" alt="Selected Item">
-        <p id="item-description"></p>
-        <p>Current Bid: $<span id="current-bid">0</span></p>
-      </div>
-      <form id="bid-form">
-        <label for="bid-amount">Your Bid:</label>
-        <input type="number" id="bid-amount" min="0" step="1" required>
-        <button type="submit">Place Bid</button>
-      </form>
-      <h3>Bid History</h3>
-      <ul id="bid-history"></ul>
-    </section>
-  </main>
+  <div class="line"></div>
+
 
   <footer>
     <div class="content">
