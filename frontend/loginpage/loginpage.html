@@ -5,9 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="loginpage.css">
+    <style>
+        .error-message {
+            color: #ff3333;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .loading {
+            display: none;
+            margin-left: 10px;
+        }
+        .password-container {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        #submit-btn {
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-
     <div class="leftbar">
         <div class="wave wave1"></div>
         <div class="wave wave2"></div>
@@ -19,24 +48,136 @@
             <h1>Login</h1>
             <p>Don't have an account? <a href="../signup_page/signup.html">Sign up</a></p>
 
-            <form class="form">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+            <form class="form" id="loginForm">
+                <div class="form-group">
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="password-container">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                        <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+                    </div>
+                    <div class="error-message" id="password-error"></div>
+                </div>
 
                 <div class="tickcheckbox">
-                    <input type="checkbox" id="remember">
+                    <input type="checkbox" id="remember" name="remember">
                     <label for="remember">Remember Me</label>
                 </div>
                 
                 <div class="login-btn">
-                    <a href="../index.html">
-                        <button type="button">Login</button>
-                    </a>
+                    <button type="submit" id="submit-btn">
+                        <span id="login-text">Login</span>
+                        <span class="loading" id="login-loading">Loading...</span>
+                    </button>
                 </div>
-                
             </form>
         </div>
     </div>
 
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+
+        // Check for remembered email
+        document.addEventListener('DOMContentLoaded', () => {
+            const rememberedEmail = localStorage.getItem('rememberedEmail');
+            if (rememberedEmail) {
+                document.getElementById('email').value = rememberedEmail;
+                document.getElementById('remember').checked = true;
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Reset errors
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // Show loading state
+            document.getElementById('login-text').style.display = 'none';
+            document.getElementById('login-loading').style.display = 'inline';
+            document.getElementById('submit-btn').disabled = true;
+
+            const formData = {
+                email: document.getElementById('email').value.trim(),
+                password: document.getElementById('password').value,
+                remember: document.getElementById('remember').checked
+            };
+
+            // Client-side validation
+            let isValid = true;
+
+            if (!formData.email) {
+                showError('email-error', 'Email is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+                showError('email-error', 'Invalid email format');
+                isValid = false;
+            }
+
+            if (!formData.password) {
+                showError('password-error', 'Password is required');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                document.getElementById('login-text').style.display = 'inline';
+                document.getElementById('login-loading').style.display = 'none';
+                document.getElementById('submit-btn').disabled = false;
+                return;
+            }
+
+            try {
+                const response = await fetch('../../backend/login.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Handle remember me
+                    if (formData.remember) {
+                        localStorage.setItem('rememberedEmail', formData.email);
+                    } else {
+                        localStorage.removeItem('rememberedEmail');
+                    }
+                    
+                    window.location.href = result.redirect || '../index.html';
+                } else {
+                    if (result.field) {
+                        showError(`${result.field}-error`, result.message);
+                    } else {
+                        alert(result.message || 'Login failed');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Login failed. Please try again.');
+            } finally {
+                document.getElementById('login-text').style.display = 'inline';
+                document.getElementById('login-loading').style.display = 'none';
+                document.getElementById('submit-btn').disabled = false;
+            }
+        });
+
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = message;
+                element.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
