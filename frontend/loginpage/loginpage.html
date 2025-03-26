@@ -78,106 +78,79 @@
     </div>
 
     <script>
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            field.type = field.type === 'password' ? 'text' : 'password';
-        }
-
-        // Check for remembered email
-        document.addEventListener('DOMContentLoaded', () => {
-            const rememberedEmail = localStorage.getItem('rememberedEmail');
-            if (rememberedEmail) {
-                document.getElementById('email').value = rememberedEmail;
-                document.getElementById('remember').checked = true;
-            }
-        });
-
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Reset errors
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-
             // Show loading state
-            document.getElementById('login-text').style.display = 'none';
-            document.getElementById('login-loading').style.display = 'inline';
-            document.getElementById('submit-btn').disabled = true;
-
-            const formData = {
-                email: document.getElementById('email').value.trim(),
-                password: document.getElementById('password').value,
-                remember: document.getElementById('remember').checked
-            };
-
-            // Client-side validation
-            let isValid = true;
-
-            if (!formData.email) {
-                showError('email-error', 'Email is required');
-                isValid = false;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-                showError('email-error', 'Invalid email format');
-                isValid = false;
-            }
-
-            if (!formData.password) {
-                showError('password-error', 'Password is required');
-                isValid = false;
-            }
-
-            if (!isValid) {
-                document.getElementById('login-text').style.display = 'inline';
-                document.getElementById('login-loading').style.display = 'none';
-                document.getElementById('submit-btn').disabled = false;
-                return;
-            }
-
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading">Logging in...</span>';
+        
             try {
+                const formData = new FormData(e.target);
                 const response = await fetch('../../backend/login.php', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
+                    body: formData
                 });
                 
                 const result = await response.json();
                 
                 if (result.success) {
                     // Handle remember me
-                    if (formData.remember) {
-                        localStorage.setItem('rememberedEmail', formData.email);
-                    } else {
-                        localStorage.removeItem('rememberedEmail');
+                    if (document.getElementById('remember').checked) {
+                        localStorage.setItem('rememberedEmail', formData.get('email'));
                     }
                     
+                    // Redirect on success
                     window.location.href = result.redirect || '../index.html';
                 } else {
+                    // Show error message in the appropriate field
                     if (result.field) {
-                        showError(`${result.field}-error`, result.message);
+                        const errorElement = document.getElementById(`${result.field}-error`);
+                        if (errorElement) {
+                            errorElement.textContent = result.message;
+                            errorElement.style.display = 'block';
+                        } else {
+                            showErrorPopup(result.message || 'Login failed');
+                        }
                     } else {
-                        alert(result.message || 'Login failed');
+                        showErrorPopup(result.message || 'Login failed');
                     }
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Login failed. Please try again.');
+                showErrorPopup('Login failed. Please try again.');
             } finally {
-                document.getElementById('login-text').style.display = 'inline';
-                document.getElementById('login-loading').style.display = 'none';
-                document.getElementById('submit-btn').disabled = false;
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Login</span>';
             }
         });
-
-        function showError(elementId, message) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.textContent = message;
-                element.style.display = 'block';
+        
+        function showErrorPopup(message) {
+            // Create popup if it doesn't exist
+            let popup = document.getElementById('error-popup');
+            if (!popup) {
+                popup = document.createElement('div');
+                popup.id = 'error-popup';
+                popup.style.position = 'fixed';
+                popup.style.top = '20px';
+                popup.style.right = '20px';
+                popup.style.backgroundColor = '#ff3333';
+                popup.style.color = 'white';
+                popup.style.padding = '15px';
+                popup.style.borderRadius = '5px';
+                popup.style.zIndex = '1000';
+                popup.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+                document.body.appendChild(popup);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    popup.remove();
+                }, 5000);
             }
+            popup.textContent = message;
         }
-    </script>
+        </script>
 </body>
 </html>
