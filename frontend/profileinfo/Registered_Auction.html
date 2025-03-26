@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Auctions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #171717, #0D1736, #010236, #000000);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+            transition: all 0.3s ease;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-nav ul {
+            list-style: none;
+        }
+
+        .main-nav li {
+            margin-bottom: 5px;
+        }
+
+        .main-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .main-nav a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-nav .active a {
+            background: rgba(98, 0, 255, 0.2);
+            color: #fff;
+            border-left: 3px solid #6200ff;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #6EE7B7, #3B82F6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 300px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 12px 15px;
+            background: #6200ff;
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+
+        /* Auction Cards */
+        .auctions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .auction-card {
+            padding: 25px;
+        }
+
+        .auction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .auction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .auction-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .auction-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-live {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        .status-upcoming {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3B82F6;
+        }
+
+        .status-completed {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22C55E;
+        }
+
+        .auction-image {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .auction-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .meta-item strong {
+            font-size: 1rem;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6EE7B7, #3B82F6);
+            border-radius: 3px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #6200ff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #7d29ff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .auctions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .search-bar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar glass-card">
+            <div class="profile-card">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User Avatar">
+                </div>
+                <h3>User00123</h3>
+                <p class="member-since">Member since 2022</p>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#"><i class="fas fa-gavel"></i> My Items</a></li>
+                    <li><a href="#"><i class="fas fa-hand-paper"></i> My Bids</a></li>
+                    <li class="active"><a href="#"><i class="fas fa-calendar-alt"></i> Registered Auctions</a></li>
+                    <li><a href="#"><i class="fas fa-heart"></i> Favorite Auctioneers</a></li>
+                    <li><a href="#"><i class="fas fa-trophy"></i> Items Won</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> My Alerts</a></li>
+                    <li><a href="#"><i class="fas fa-user-cog"></i> Account Info</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+                <h1><i class="fas fa-calendar-alt"></i> Registered Auctions</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search auctions...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="auctions-grid">
+                <!-- Auction 1 -->
+                <div class="glass-card auction-card">
+                    <div class="auction-header">
+                        <h2 class="auction-title">Modern Art Collection</h2>
+                        <span class="auction-status status-live">Live Now</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1531913764164-f85c52e6e654?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGFpbnRpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60" class="auction-image">
+                    <div class="auction-meta">
+                        <div class="meta-item">
+                            <span>Start Time</span>
+                            <strong>Today, 3:00 PM</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>End Time</span>
+                            <strong>Tomorrow, 5:00 PM</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Items</span>
+                            <strong>42 Lots</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Your Bids</span>
+                            <strong>3 Items</strong>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Auction Progress</span>
+                            <span>65% Complete</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">View Auction</button>
+                        <button class="btn btn-outline">Set Reminder</button>
+                    </div>
+                </div>
+
+                <!-- Auction 2 -->
+                <div class="glass-card auction-card">
+                    <div class="auction-header">
+                        <h2 class="auction-title">Luxury Timepieces</h2>
+                        <span class="auction-status status-upcoming">Starts Soon</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0Y2hlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" class="auction-image">
+                    <div class="auction-meta">
+                        <div class="meta-item">
+                            <span>Start Time</span>
+                            <strong>May 15, 10:00 AM</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>End Time</span>
+                            <strong>May 16, 6:00 PM</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Items</span>
+                            <strong>28 Lots</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Your Watchlist</span>
+                            <strong>5 Items</strong>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Time Until Start</span>
+                            <span>2 days 4 hours</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 15%"></div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">Preview Items</button>
+                        <button class="btn btn-outline">+ Watchlist</button>
+                    </div>
+                </div>
+
+                <!-- Auction 3 -->
+                <div class="glass-card auction-card">
+                    <div class="auction-header">
+                        <h2 class="auction-title">Rare Book Collection</h2>
+                        <span class="auction-status status-completed">Completed</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Ym9va3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60" class="auction-image">
+                    <div class="auction-meta">
+                        <div class="meta-item">
+                            <span>Start Time</span>
+                            <strong>April 28, 2023</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>End Time</span>
+                            <strong>April 30, 2023</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Items</span>
+                            <strong>35 Lots</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Your Wins</span>
+                            <strong>2 Items</strong>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Results</span>
+                            <span>100% Sold</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">View Results</button>
+                        <button class="btn btn-outline">Similar Auctions</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple interaction for buttons
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const auctionTitle = this.closest('.auction-card').querySelector('.auction-title').textContent;
+                console.log(`Viewing auction: ${auctionTitle}`);
+                // In a real app, this would navigate to the auction detail page
+            });
+        });
+    </script>
+</body>
+</html>

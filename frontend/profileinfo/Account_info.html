@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #171717, #0D1736, #010236, #000000);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+            transition: all 0.3s ease;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-nav ul {
+            list-style: none;
+        }
+
+        .main-nav li {
+            margin-bottom: 5px;
+        }
+
+        .main-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .main-nav a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-nav .active a {
+            background: rgba(98, 0, 255, 0.2);
+            color: #fff;
+            border-left: 3px solid #6200ff;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #6EE7B7, #3B82F6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Account Sections */
+        .account-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        .account-section {
+            padding: 25px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .edit-btn {
+            background: transparent;
+            border: none;
+            color: #3B82F6;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22C55E;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #6200ff;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #6200ff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #7d29ff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Security Status */
+        .security-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .security-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22C55E;
+        }
+
+        .security-text strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .security-text span {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .account-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar glass-card">
+            <div class="profile-card">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User Avatar">
+                </div>
+                <h3>User00123</h3>
+                <p class="member-since">Member since 2022</p>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="profile.html"><i class="fas fa-gavel"></i> My Items</a></li>
+                    <li><a href="mybids.html"><i class="fas fa-hand-paper"></i> My Bids</a></li>
+                    <li><a href="registered-auctions.html"><i class="fas fa-calendar-alt"></i> Registered Auctions</a></li>
+                    <li><a href="favorite-auctioneers.html"><i class="fas fa-heart"></i> Favorite Auctioneers</a></li>
+                    <li><a href="items-won.html"><i class="fas fa-trophy"></i> Items Won</a></li>
+                    <li><a href="my-alerts.html"><i class="fas fa-bell"></i> My Alerts</a></li>
+                    <li class="active"><a href="account-info.html"><i class="fas fa-user-cog"></i> Account Info</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+                <h1><i class="fas fa-user-cog"></i> Account Information</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search settings...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="account-sections">
+                <!-- Personal Info Section -->
+                <div class="glass-card account-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Personal Information</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Full Name</div>
+                            <div class="info-value">Jessica Parker</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Username</div>
+                            <div class="info-value">User00123</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">
+                                jessica.parker@example.com
+                                <span class="verification-badge">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Phone</div>
+                            <div class="info-value">
+                                +1 (555) 123-4567
+                                <span class="verification-badge">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Date of Birth</div>
+                            <div class="info-value">March 15, 1985</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Member Since</div>
+                            <div class="info-value">June 2022</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Security Section -->
+                <div class="glass-card account-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Account Security</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-shield-alt"></i> Secure
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="password" value="••••••••" class="form-input" readonly>
+                            <button class="btn btn-outline">Change</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Two-Factor Authentication</label>
+                        <div style="display: flex; gap: 10px;">
+                            <select class="form-input">
+                                <option>SMS Verification</option>
+                                <option>Authenticator App</option>
+                                <option>Email Verification</option>
+                            </select>
+                            <button class="btn btn-outline">Enable</button>
+                        </div>
+                    </div>
+                    <div class="security-status">
+                        <div class="security-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="security-text">
+                            <strong>Security Status: Excellent</strong>
+                            <span>All recommended security measures are active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Address Section -->
+                <div class="glass-card account-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Billing Address</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Street Address</div>
+                            <div class="info-value">123 Auction Lane</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">City</div>
+                            <div class="info-value">New York</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">State/Province</div>
+                            <div class="info-value">NY</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">ZIP/Postal Code</div>
+                            <div class="info-value">10001</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Country</div>
+                            <div class="info-value">United States</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Methods Section -->
+                <div class="glass-card account-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Payment Methods</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-plus"></i> Add New
+                        </button>
+                    </div>
+                    <div class="payment-method">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fab fa-cc-visa" style="font-size: 2rem; color: #1a1f71;"></i>
+                            <div>
+                                <div class="info-value">Visa •••• •••• 4242</div>
+                                <div class="info-label">Expires 05/2025</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fab fa-paypal" style="font-size: 2rem; color: #003087;"></i>
+                            <div>
+                                <div class="info-value">PayPal</div>
+                                <div class="info-label">jessica.parker@example.com</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 15px;">
+                        <i class="fas fa-edit"></i> Manage Payment Methods
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Edit functionality
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const sectionTitle = this.closest('.section-header').querySelector('.section-title').textContent;
+                console.log(`Editing ${sectionTitle}`);
+                // In a real app, this would enable editing mode
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-bar input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.account-section').forEach(section => {
+                const sectionText = section.textContent.toLowerCase();
+                section.style.display = sectionText.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
