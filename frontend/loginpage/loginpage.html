@@ -5,38 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="loginpage.css">
-    <style>
-        .error-message {
-            color: #ff3333;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-        .loading {
-            display: none;
-            margin-left: 10px;
-        }
-        .password-container {
-            position: relative;
-        }
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            user-select: none;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        #submit-btn {
-            width: 100%;
-            padding: 10px;
-        }
-    </style>
 </head>
 <body>
+
     <div class="leftbar">
         <div class="wave wave1"></div>
         <div class="wave wave2"></div>
@@ -48,109 +19,24 @@
             <h1>Login</h1>
             <p>Don't have an account? <a href="../signup_page/signup.html">Sign up</a></p>
 
-            <form class="form" id="loginForm">
-                <div class="form-group">
-                    <input type="email" name="email" id="email" placeholder="Email" required>
-                    <div class="error-message" id="email-error"></div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="password-container">
-                        <input type="password" name="password" id="password" placeholder="Password" required>
-                        <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
-                    </div>
-                    <div class="error-message" id="password-error"></div>
-                </div>
+            <form class="form">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
 
                 <div class="tickcheckbox">
-                    <input type="checkbox" id="remember" name="remember">
+                    <input type="checkbox" id="remember">
                     <label for="remember">Remember Me</label>
                 </div>
                 
                 <div class="login-btn">
-                    <button type="submit" id="submit-btn">
-                        <span id="login-text">Login</span>
-                        <span class="loading" id="login-loading">Loading...</span>
-                    </button>
+                    <a href="../index.html">
+                        <button type="button">Login</button>
+                    </a>
                 </div>
+                
             </form>
         </div>
     </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Show loading state
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading">Logging in...</span>';
-        
-            try {
-                const formData = new FormData(e.target);
-                const response = await fetch('../../backend/login.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    // Handle remember me
-                    if (document.getElementById('remember').checked) {
-                        localStorage.setItem('rememberedEmail', formData.get('email'));
-                    }
-                    
-                    // Redirect on success
-                    window.location.href = result.redirect || '../index.html';
-                } else {
-                    // Show error message in the appropriate field
-                    if (result.field) {
-                        const errorElement = document.getElementById(`${result.field}-error`);
-                        if (errorElement) {
-                            errorElement.textContent = result.message;
-                            errorElement.style.display = 'block';
-                        } else {
-                            showErrorPopup(result.message || 'Login failed');
-                        }
-                    } else {
-                        showErrorPopup(result.message || 'Login failed');
-                    }
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showErrorPopup('Login failed. Please try again.');
-            } finally {
-                // Reset button state
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>Login</span>';
-            }
-        });
-        
-        function showErrorPopup(message) {
-            // Create popup if it doesn't exist
-            let popup = document.getElementById('error-popup');
-            if (!popup) {
-                popup = document.createElement('div');
-                popup.id = 'error-popup';
-                popup.style.position = 'fixed';
-                popup.style.top = '20px';
-                popup.style.right = '20px';
-                popup.style.backgroundColor = '#ff3333';
-                popup.style.color = 'white';
-                popup.style.padding = '15px';
-                popup.style.borderRadius = '5px';
-                popup.style.zIndex = '1000';
-                popup.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-                document.body.appendChild(popup);
-                
-                // Auto-remove after 5 seconds
-                setTimeout(() => {
-                    popup.remove();
-                }, 5000);
-            }
-            popup.textContent = message;
-        }
-        </script>
 </body>
 </html>
